@@ -141,7 +141,8 @@ export const Analyze: React.FC = () => {
   };
 
   const handleLoadSample = () => {
-    setUploadedFile(null);
+    const mockFile = new File([SAMPLE_RESUME], 'Sample_Engineer_Resume.pdf', { type: 'application/pdf' });
+    setUploadedFile(mockFile);
     setResumeText(SAMPLE_RESUME);
     setJdText(SAMPLE_JD);
     setTouched({ resume: true, jd: true });
@@ -357,30 +358,6 @@ export const Analyze: React.FC = () => {
                   </div>
                 </div>
               )}
-
-              {/* Or paste manual text */}
-              <div className="space-y-1.5 pt-1">
-                <span className="text-xs text-zinc-500 font-medium">
-                  Or paste resume text directly:
-                </span>
-                <textarea
-                  id="resume-input"
-                  value={resumeText}
-                  onChange={(e) => {
-                    setResumeText(e.target.value);
-                    if (uploadedFile) setUploadedFile(null);
-                  }}
-                  onBlur={() => setTouched((prev) => ({ ...prev, resume: true }))}
-                  placeholder="Paste resume text here (Work Experience, Skills, Education)..."
-                  rows={6}
-                  disabled={isLoading || isExtracting}
-                  className={`w-full p-3 rounded-lg border text-xs font-sans focus:outline-none transition-colors ${
-                    touched.resume && isResumeEmpty
-                      ? 'border-rose-300 bg-rose-50/20'
-                      : 'border-zinc-200 bg-white focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 text-zinc-900'
-                  }`}
-                />
-              </div>
             </div>
           )}
 
@@ -388,7 +365,7 @@ export const Analyze: React.FC = () => {
           {touched.resume && isResumeEmpty && !isExtracting && (
             <p className="text-xs text-rose-600 font-medium flex items-center gap-1">
               <AlertCircle className="w-3.5 h-3.5" />
-              Please upload your resume file or paste your resume text.
+              Please upload your resume file (PDF or Word).
             </p>
           )}
         </div>
@@ -468,7 +445,7 @@ export const Analyze: React.FC = () => {
 
             {!isFormValid && (
               <p className="text-xs text-zinc-400 font-normal text-center">
-                Both Resume (upload or text) and Job Description are required.
+                Both Resume (PDF/Word upload) and Job Description are required.
               </p>
             )}
           </div>
