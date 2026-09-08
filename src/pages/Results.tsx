@@ -11,7 +11,6 @@ import {
   ChevronUp,
   Check,
   RefreshCw,
-  Award,
   Layers
 } from 'lucide-react';
 import type { Analysis } from '../types';

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Check, 
-  ArrowRight, 
-  LayoutTemplate, 
   Sparkles, 
   Download, 
   ExternalLink, 
@@ -400,6 +398,18 @@ export const Templates: React.FC = () => {
                     required
                     value={candidateName}
                     onChange={(e) => setCandidateName(e.target.value)}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-zinc-200 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]"
+                  />
+                </div>
+
+                {/* Candidate Email */}
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-zinc-800 block">Candidate Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={candidateEmail}
+                    onChange={(e) => setCandidateEmail(e.target.value)}
                     className="w-full px-3 py-2 text-xs rounded-lg border border-zinc-200 focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]"
                   />
                 </div>
