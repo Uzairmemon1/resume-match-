@@ -88,8 +88,11 @@ export const Analyze: React.FC = () => {
     'Preparing optimization suggestions...'
   ];
 
-  const countWords = (text: string) => (text.trim() ? text.trim().split(/\s+/).length : 0);
-  const countChars = (text: string) => text.length;
+  const countWords = (text: string) => {
+    const cleaned = text.replace(/[\u200B\u00A0\uFEFF]/g, ' ').trim();
+    return cleaned ? cleaned.split(/\s+/).filter(Boolean).length : 0;
+  };
+  const countChars = (text: string) => text.replace(/\r\n/g, '\n').length;
 
   // Strict Validation: Both fields are mandatory!
   const isResumeEmpty = resumeText.trim().length === 0;
@@ -183,8 +186,12 @@ export const Analyze: React.FC = () => {
         fullResumeText: resumeText,
         fullJDText: jdText,
         score: matchResult.score,
+        tier: matchResult.tier,
         matchedKeywords: matchResult.matchedKeywords,
         missingKeywords: matchResult.missingKeywords,
+        partialKeywords: matchResult.partialKeywords,
+        detailedMatches: matchResult.detailedMatches,
+        breakdown: matchResult.breakdown,
       };
 
       // Automatically persist to history
@@ -385,7 +392,24 @@ export const Analyze: React.FC = () => {
           <textarea
             id="jd-input"
             value={jdText}
-            onChange={(e) => setJdText(e.target.value)}
+            onChange={(e) => {
+              setJdText(e.target.value);
+              if (e.target.value.trim().length > 0) {
+                setTouched((prev) => ({ ...prev, jd: true }));
+              }
+            }}
+            onInput={(e) => {
+              const val = (e.target as HTMLTextAreaElement).value;
+              setJdText(val);
+            }}
+            onPaste={(e) => {
+              const pasted = e.clipboardData.getData('text');
+              if (pasted) {
+                // If textarea was empty, immediately fill with pasted content
+                setJdText((prev) => (!prev.trim() ? pasted : prev));
+                setTouched((prev) => ({ ...prev, jd: true }));
+              }
+            }}
             onBlur={() => setTouched((prev) => ({ ...prev, jd: true }))}
             placeholder="Paste the target job description or job posting here (responsibilities, required skills, qualifications)..."
             rows={15}

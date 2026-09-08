@@ -42,31 +42,45 @@ export const HistoryPage: React.FC = () => {
     navigate('/results', { state: { analysis: item } });
   };
 
-  const getScoreBadge = (score: number | null) => {
+  const getScoreBadge = (score: number | null, tier?: string) => {
     if (score === null) {
       return (
         <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 text-zinc-700 border border-zinc-200">
-          No Skills
+          No Score
         </span>
       );
     }
-    if (score >= 71) {
+    if (score >= 80) {
       return (
-        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-          {score}% Match
+        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200" title={tier}>
+          {score}% • Strong
         </span>
       );
     }
-    if (score >= 41) {
+    if (score >= 60) {
       return (
-        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-          {score}% Match
+        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200" title={tier}>
+          {score}% • Good
+        </span>
+      );
+    }
+    if (score >= 40) {
+      return (
+        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200" title={tier}>
+          {score}% • Moderate
+        </span>
+      );
+    }
+    if (score >= 20) {
+      return (
+        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-50 text-orange-700 border border-orange-200" title={tier}>
+          {score}% • Weak
         </span>
       );
     }
     return (
-      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">
-        {score}% Match
+      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200" title={tier}>
+        {score}% • Poor
       </span>
     );
   };
@@ -175,7 +189,7 @@ export const HistoryPage: React.FC = () => {
 
                 {/* Score */}
                 <div className="sm:col-span-2 sm:text-center">
-                  {getScoreBadge(item.score)}
+                  {getScoreBadge(item.score, item.tier)}
                 </div>
 
                 {/* Preview */}
