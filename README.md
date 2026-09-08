@@ -1,32 +1,64 @@
-# React + TypeScript + Vite
+# ⚡ ResumeMatch — AI ATS Resume Checker & Keyword Matcher
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+![ResumeMatch Banner](https://img.shields.io/badge/ATS-Resume%20Matcher-blue?style=for-the-badge&logo=react)
+![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
+![Client Side](https://img.shields.io/badge/100%25-Client%20Side-emerald?style=for-the-badge)
 
-Currently, two official plugins are available:
+**ResumeMatch** is a modern, high-performance, 100% client-side ATS (Applicant Tracking System) resume analyzer. Match any resume against a job description in real-time to uncover missing keywords, calculate compatibility scores, and get actionable improvement suggestions to beat recruitment algorithms.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Inspired by modern SaaS designs with deep dark obsidian palettes, glowing gradient highlights, and glassmorphism.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Key Features
 
-## Expanding the Oxlint configuration
+- **⚡ Instant ATS Match Score**: Circular progress gauge displaying match percentages with color-coded tiers (Poor, Good, Excellent).
+- **🎯 Keyword Analysis**: Side-by-side comparison of **Matched Keywords** (green badges) vs. **Missing Keywords** (rose badges) across 100+ skill categories.
+- **💡 Tailored Optimization Tips**: Direct, actionable suggestions telling you exactly which skills to integrate into your experience bullet points.
+- **🛡️ 100% Client-Side Privacy**: Zero server uploads. All resume text and job descriptions stay in your browser memory.
+- **📂 Persistent History**: Automatically saves analysis history to `localStorage`, with quick detail reviews, individual deletion, and clean-all modal.
+- **✨ Lovable-Inspired Design**: Sleek dark aesthetic, glowing mesh gradients, glassmorphic panels, and smooth micro-animations.
+- **📱 Fully Responsive**: Seamless mobile and desktop navigation with a responsive drawer menu.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+---
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## 🛠️ Tech Stack
+
+- **Framework**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict typing, zero `any`)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) + Custom Glassmorphism
+- **Routing**: [React Router v7](https://reactrouter.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Storage**: Browser `localStorage`
+
+---
+
+## 📦 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/<YOUR-USERNAME>/<YOUR-REPO-NAME>.git
+cd resume-match
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Run development server
+```bash
+npm run dev
+```
+Open `http://localhost:5173/` in your browser.
+
+### 4. Build for production
+```bash
+npm run build
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
