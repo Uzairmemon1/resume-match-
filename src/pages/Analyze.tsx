@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  FileText, 
-  Briefcase, 
-  Loader2, 
-  AlertCircle, 
-  Wand2, 
-  ArrowRight, 
-  UploadCloud, 
-  FileCheck2, 
-  Trash2, 
-  CheckCircle2, 
+import {
+  FileText,
+  Briefcase,
+  Loader2,
+  AlertCircle,
+  Wand2,
+  ArrowRight,
+  UploadCloud,
+  FileCheck2,
+  Trash2,
+  CheckCircle2,
   Edit3
 } from 'lucide-react';
 import { analyzeMatch } from '../utils/matcher';
@@ -197,7 +197,7 @@ export const Analyze: React.FC = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-16 pt-4">
-      
+
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-5">
         <div>
@@ -223,14 +223,14 @@ export const Analyze: React.FC = () => {
 
       {/* Input Form Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
+
         {/* ================= RESUME UPLOAD SECTION ================= */}
         <div className="flex flex-col space-y-2">
           <div className="flex items-center justify-between">
             <label className="font-semibold text-zinc-900 text-sm flex items-center gap-1.5">
               <FileText className="w-4 h-4 text-zinc-700" />
               <span>Resume</span>
-              <span className="text-rose-500 text-xs font-normal">* (Mandatory)</span>
+              <span className="text-rose-500 text-xs font-normal">*</span>
             </label>
             {resumeText.trim().length > 0 && (
               <span className="text-xs text-zinc-500">
@@ -317,13 +317,12 @@ export const Analyze: React.FC = () => {
                 }}
                 onDragLeave={() => setIsDragOver(false)}
                 onDrop={handleDrop}
-                className={`cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-colors flex flex-col items-center justify-center space-y-2.5 ${
-                  isDragOver
+                className={`cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-colors flex flex-col items-center justify-center space-y-2.5 ${isDragOver
                     ? 'border-zinc-900 bg-zinc-50'
                     : touched.resume && isResumeEmpty
-                    ? 'border-rose-300 bg-rose-50/20'
-                    : 'border-zinc-300 bg-zinc-50/40 hover:border-zinc-400 hover:bg-zinc-50'
-                }`}
+                      ? 'border-rose-300 bg-rose-50/20'
+                      : 'border-zinc-300 bg-zinc-50/40 hover:border-zinc-400 hover:bg-zinc-50'
+                  }`}
               >
                 {isExtracting ? (
                   <div className="space-y-1.5 py-3">
@@ -376,7 +375,7 @@ export const Analyze: React.FC = () => {
             <label htmlFor="jd-input" className="font-semibold text-zinc-900 text-sm flex items-center gap-1.5">
               <Briefcase className="w-4 h-4 text-zinc-700" />
               <span>Job Description</span>
-              <span className="text-rose-500 text-xs font-normal">* (Mandatory)</span>
+              <span className="text-rose-500 text-xs font-normal">*</span>
             </label>
             <span className="text-xs text-zinc-500">
               {countWords(jdText)} words | {countChars(jdText)} chars
@@ -391,11 +390,10 @@ export const Analyze: React.FC = () => {
             placeholder="Paste the target job description or job posting here (responsibilities, required skills, qualifications)..."
             rows={15}
             disabled={isLoading}
-            className={`w-full p-3.5 rounded-xl border text-sm font-sans focus:outline-none transition-colors ${
-              touched.jd && isJdEmpty
+            className={`w-full p-3.5 rounded-xl border text-sm font-sans focus:outline-none transition-colors ${touched.jd && isJdEmpty
                 ? 'border-rose-300 bg-rose-50/20'
                 : 'border-zinc-200 bg-white focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 text-zinc-900'
-            }`}
+              }`}
           />
 
           {touched.jd && isJdEmpty && (
@@ -410,7 +408,7 @@ export const Analyze: React.FC = () => {
 
       {/* Loading Overlay or Action Button */}
       <div className="pt-2 flex flex-col items-center justify-center space-y-3">
-        
+
         {isLoading ? (
           <div className="w-full max-w-sm card-minimal p-5 rounded-xl text-center space-y-3 shadow-sm">
             <Loader2 className="w-6 h-6 text-zinc-700 animate-spin mx-auto" />
@@ -433,11 +431,10 @@ export const Analyze: React.FC = () => {
               type="button"
               onClick={handleAnalyze}
               disabled={!isFormValid}
-              className={`w-full py-3 px-6 rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2 ${
-                isFormValid
+              className={`w-full py-3 px-6 rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2 ${isFormValid
                   ? 'bg-zinc-900 hover:bg-zinc-800 text-white shadow-xs cursor-pointer'
                   : 'bg-zinc-100 text-zinc-400 cursor-not-allowed border border-zinc-200'
-              }`}
+                }`}
             >
               <span>Analyze Match</span>
               <ArrowRight className="w-4 h-4" />
