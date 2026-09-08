@@ -7,7 +7,6 @@ import {
   RotateCcw, 
   FileText, 
   Briefcase, 
-  Sparkles, 
   ChevronDown, 
   ChevronUp,
   Check
@@ -33,7 +32,7 @@ export const Results: React.FC = () => {
   const [showFullResume, setShowFullResume] = useState(false);
   const [showFullJD, setShowFullJD] = useState(false);
 
-  // When analysis is present, ensure it is persisted in storage
+  // Automatically ensure the current analysis is persisted
   React.useEffect(() => {
     if (analysis) {
       saveAnalysis(analysis);
@@ -42,19 +41,19 @@ export const Results: React.FC = () => {
 
   if (!analysis) {
     return (
-      <div className="max-w-xl mx-auto my-16 text-center glass-card p-10 rounded-3xl space-y-6 border border-slate-800 shadow-2xl">
-        <div className="w-16 h-16 bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 rounded-2xl flex items-center justify-center mx-auto">
-          <Sparkles className="w-8 h-8" />
+      <div className="max-w-md mx-auto my-16 text-center card-minimal p-8 rounded-xl space-y-4">
+        <div className="w-12 h-12 bg-zinc-100 text-zinc-700 rounded-lg flex items-center justify-center mx-auto">
+          <FileText className="w-6 h-6" />
         </div>
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-white">No Active Analysis Found</h2>
-          <p className="text-slate-400 text-sm">
-            Please paste your resume and job description on the Analyze page to view your score breakdown.
+        <div className="space-y-1">
+          <h2 className="text-lg font-bold text-zinc-900">No Active Analysis Found</h2>
+          <p className="text-zinc-500 text-xs">
+            Please upload your resume and job description to generate your match report.
           </p>
         </div>
         <Link
           to="/analyze"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm rounded-xl shadow-lg transition-all"
+          className="inline-flex items-center justify-center px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs rounded-lg transition-colors"
         >
           Go to Analyze Page
         </Link>
@@ -75,38 +74,37 @@ export const Results: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-10 pb-16 pt-4">
+    <div className="max-w-5xl mx-auto space-y-8 pb-16 pt-4">
       
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-5">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-medium mb-1.5">
             Analysis Report
           </div>
-          <h1 className="text-3xl font-black text-white tracking-tight">
-            ATS Compatibility Breakdown
+          <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+            ATS Match Breakdown
           </h1>
-          <p className="text-slate-400 text-xs mt-1">
+          <p className="text-zinc-500 text-xs mt-0.5">
             Generated on {analysis.date}
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
           <button
             type="button"
             onClick={handleSaveToHistory}
-            className="px-4 py-2.5 rounded-xl font-extrabold text-xs shadow-md transition-all flex items-center gap-2 bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-900/60"
+            className="px-3.5 py-2 rounded-lg font-medium text-xs transition-colors flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200"
             title="Analysis is automatically saved to history"
           >
-            <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
+            <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[2.5]" />
             <span>{savedFeedback ? 'Saved to History!' : 'Saved in History'}</span>
           </button>
 
           <Link
             to="/history"
-            className="px-4 py-2.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 font-bold text-xs rounded-xl transition-all flex items-center gap-2 border border-indigo-500/30 shadow-sm"
+            className="px-3.5 py-2 bg-white hover:bg-zinc-50 text-zinc-700 font-medium text-xs rounded-lg transition-colors flex items-center gap-1.5 border border-zinc-200"
           >
             <span>View All History</span>
           </Link>
@@ -114,9 +112,9 @@ export const Results: React.FC = () => {
           <button
             type="button"
             onClick={handleAnalyzeAnother}
-            className="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center gap-2 border border-slate-800"
+            className="px-3.5 py-2 bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs rounded-lg transition-colors flex items-center gap-1.5"
           >
-            <RotateCcw className="w-4 h-4 text-slate-400" />
+            <RotateCcw className="w-3.5 h-3.5 text-zinc-300" />
             <span>Analyze Another</span>
           </button>
         </div>
@@ -127,65 +125,65 @@ export const Results: React.FC = () => {
 
       {/* Breakdown Grid: Matched vs Missing Keywords */}
       {analysis.score !== null && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           {/* Matched Keywords Box */}
-          <div className="glass-card rounded-3xl border-emerald-500/30 p-6 sm:p-8 space-y-4 shadow-xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
-                  <CheckCircle2 className="w-5 h-5" />
+          <div className="card-minimal rounded-xl p-6 space-y-3.5">
+            <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center">
+                  <CheckCircle2 className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-white text-lg">Matched Keywords</h3>
-                  <p className="text-slate-400 text-xs">Present in both resume and job description</p>
+                  <h3 className="font-bold text-zinc-900 text-sm">Matched Keywords</h3>
+                  <p className="text-zinc-500 text-xs">Present in both resume and job description</p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-xs font-black bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
-                {analysis.matchedKeywords.length} Found
+              <span className="px-2 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                {analysis.matchedKeywords.length}
               </span>
             </div>
 
             {analysis.matchedKeywords.length > 0 ? (
-              <div className="flex flex-wrap gap-2 pt-2">
+              <div className="flex flex-wrap gap-1.5 pt-1">
                 {analysis.matchedKeywords.map((kw) => (
                   <KeywordBadge key={kw} keyword={kw} type="matched" />
                 ))}
               </div>
             ) : (
-              <p className="text-slate-400 text-sm italic py-4">
-                No matching target keywords detected from the skill dictionary.
+              <p className="text-zinc-500 text-xs italic py-3">
+                No matching keywords detected from predefined skill list.
               </p>
             )}
           </div>
 
           {/* Missing Keywords Box */}
-          <div className="glass-card rounded-3xl border-rose-500/30 p-6 sm:p-8 space-y-4 shadow-xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center">
-                  <XCircle className="w-5 h-5" />
+          <div className="card-minimal rounded-xl p-6 space-y-3.5">
+            <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 flex items-center justify-center">
+                  <XCircle className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-white text-lg">Missing Keywords</h3>
-                  <p className="text-slate-400 text-xs">Required by job posting, missing in resume</p>
+                  <h3 className="font-bold text-zinc-900 text-sm">Missing Keywords</h3>
+                  <p className="text-zinc-500 text-xs">Required by job description, not found in resume</p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-xs font-black bg-rose-500/10 text-rose-300 border border-rose-500/30">
-                {analysis.missingKeywords.length} Missing
+              <span className="px-2 py-0.5 rounded-md text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-200">
+                {analysis.missingKeywords.length}
               </span>
             </div>
 
             {analysis.missingKeywords.length > 0 ? (
-              <div className="flex flex-wrap gap-2 pt-2">
+              <div className="flex flex-wrap gap-1.5 pt-1">
                 {analysis.missingKeywords.map((kw) => (
                   <KeywordBadge key={kw} keyword={kw} type="missing" />
                 ))}
               </div>
             ) : (
-              <div className="p-4 bg-emerald-950/60 text-emerald-300 text-sm font-semibold rounded-2xl flex items-center gap-2 border border-emerald-500/30">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <span>Outstanding! Zero missing target keywords detected.</span>
+              <div className="p-3 bg-emerald-50 text-emerald-800 text-xs font-medium rounded-lg flex items-center gap-2 border border-emerald-200">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>Zero missing target keywords detected. Excellent!</span>
               </div>
             )}
           </div>
@@ -195,30 +193,30 @@ export const Results: React.FC = () => {
 
       {/* Suggestions Section */}
       {analysis.missingKeywords.length > 0 && (
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-indigo-500/40 p-6 sm:p-8 shadow-2xl space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-300">
-              <Lightbulb className="w-6 h-6" />
+        <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-6 space-y-4">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-white border border-zinc-200 flex items-center justify-center text-zinc-800 shadow-2xs">
+              <Lightbulb className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white">Optimization Suggestions</h3>
-              <p className="text-indigo-200/90 text-sm">
-                Add these specific missing keywords into your experience bullet points to boost your ATS score.
+              <h3 className="text-sm font-bold text-zinc-900">Optimization Suggestions</h3>
+              <p className="text-zinc-500 text-xs">
+                Incorporate these missing skills naturally into your experience bullet points or summary:
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
             {analysis.missingKeywords.map((kw) => (
               <div
                 key={kw}
-                className="bg-slate-950/60 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm flex items-start gap-3 backdrop-blur-md"
+                className="bg-white border border-zinc-200 rounded-lg p-3 text-xs flex items-start gap-2"
               >
-                <div className="w-2 h-2 rounded-full bg-indigo-400 mt-2 flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 mt-1.5 flex-shrink-0" />
                 <div>
-                  <span className="font-extrabold capitalize text-white">{kw}</span>
-                  <p className="text-slate-400 text-xs mt-0.5 leading-relaxed">
-                    Incorporate <code className="bg-slate-800 text-indigo-300 px-1.5 py-0.5 rounded border border-slate-700 font-mono text-[11px]">{kw}</code> into your work experience or skills section.
+                  <span className="font-semibold capitalize text-zinc-900">{kw}</span>
+                  <p className="text-zinc-500 text-[11px] mt-0.5 leading-relaxed">
+                    Add <code className="bg-zinc-100 text-zinc-800 px-1 py-0.5 rounded font-mono">{kw}</code> to your skills or project description.
                   </p>
                 </div>
               </div>
@@ -227,55 +225,55 @@ export const Results: React.FC = () => {
         </div>
       )}
 
-      {/* Text Inspection Accordion */}
-      <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl border border-slate-800">
-        <h3 className="font-bold text-white text-base">Inspected Content Text</h3>
+      {/* Text Content Preview Accordion */}
+      <div className="card-minimal rounded-xl p-5 space-y-3">
+        <h3 className="font-bold text-zinc-900 text-sm">Inspected Text</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
           {/* Resume Accordion */}
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-2">
+          <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 space-y-1.5">
             <button
               onClick={() => setShowFullResume(!showFullResume)}
-              className="w-full flex items-center justify-between text-slate-200 font-bold text-sm"
+              className="w-full flex items-center justify-between text-zinc-800 font-semibold text-xs"
             >
-              <span className="flex items-center gap-2">
-                <FileText className="w-4 h-4 text-indigo-400" />
-                Resume Text ({analysis.fullResumeText.length} chars)
+              <span className="flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-zinc-600" />
+                Resume ({analysis.fullResumeText.length} chars)
               </span>
-              {showFullResume ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              {showFullResume ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
             
             {showFullResume ? (
-              <pre className="text-xs bg-slate-950 p-3.5 rounded-xl text-slate-300 whitespace-pre-wrap max-h-60 overflow-y-auto border border-slate-800 font-mono">
+              <pre className="text-[11px] bg-white p-3 rounded border border-zinc-200 text-zinc-700 whitespace-pre-wrap max-h-52 overflow-y-auto font-mono">
                 {analysis.fullResumeText}
               </pre>
             ) : (
-              <p className="text-xs text-slate-400 line-clamp-2 italic">
+              <p className="text-xs text-zinc-500 line-clamp-2 italic">
                 "{analysis.resumePreview}"
               </p>
             )}
           </div>
 
           {/* Job Description Accordion */}
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-2">
+          <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 space-y-1.5">
             <button
               onClick={() => setShowFullJD(!showFullJD)}
-              className="w-full flex items-center justify-between text-slate-200 font-bold text-sm"
+              className="w-full flex items-center justify-between text-zinc-800 font-semibold text-xs"
             >
-              <span className="flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-indigo-400" />
+              <span className="flex items-center gap-1.5">
+                <Briefcase className="w-3.5 h-3.5 text-zinc-600" />
                 Job Description ({analysis.fullJDText.length} chars)
               </span>
-              {showFullJD ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              {showFullJD ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
 
             {showFullJD ? (
-              <pre className="text-xs bg-slate-950 p-3.5 rounded-xl text-slate-300 whitespace-pre-wrap max-h-60 overflow-y-auto border border-slate-800 font-mono">
+              <pre className="text-[11px] bg-white p-3 rounded border border-zinc-200 text-zinc-700 whitespace-pre-wrap max-h-52 overflow-y-auto font-mono">
                 {analysis.fullJDText}
               </pre>
             ) : (
-              <p className="text-xs text-slate-400 line-clamp-2 italic">
+              <p className="text-xs text-zinc-500 line-clamp-2 italic">
                 "{analysis.fullJDText.slice(0, 120)}..."
               </p>
             )}

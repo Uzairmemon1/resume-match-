@@ -6,18 +6,18 @@ import { Analyze } from './pages/Analyze';
 import { Results } from './pages/Results';
 import { HistoryPage } from './pages/History';
 import { About } from './pages/About';
-import { Target, Heart } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
+      <div className="min-h-screen flex flex-col bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
         
-        {/* Top Navbar */}
+        {/* Minimal Navbar */}
         <Navbar />
 
-        {/* Main Content Viewport */}
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Main Content Area */}
+        <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/analyze" element={<Analyze />} />
@@ -28,21 +28,21 @@ export const App: React.FC = () => {
           </Routes>
         </main>
 
-        {/* Glass Footer */}
-        <footer className="bg-slate-950/80 border-t border-slate-800/80 py-8 text-xs text-slate-400 mt-auto backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div className="flex items-center gap-2.5">
-              <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-sm">
-                <Target className="w-3.5 h-3.5 stroke-[2.5]" />
+        {/* Minimal Clean Footer */}
+        <footer className="border-t border-zinc-200 py-6 text-xs text-zinc-500 bg-white mt-auto">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded bg-zinc-900 flex items-center justify-center text-white">
+                <FileText className="w-3 h-3" />
               </div>
-              <span className="font-extrabold text-white">ResumeMatch</span>
-              <span>— Modern AI ATS Engine</span>
+              <span className="font-semibold text-zinc-800">ResumeMatch</span>
+              <span>— Clean ATS Resume Matcher</span>
             </div>
             
-            <div className="flex items-center gap-2 text-slate-400 font-semibold">
+            <div className="flex items-center gap-2 text-zinc-400">
               <span>100% Client-Side Privacy</span>
               <span>•</span>
-              <span className="flex items-center gap-1">Built with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" /> for Job Seekers</span>
+              <span>No Server Uploads</span>
             </div>
           </div>
         </footer>

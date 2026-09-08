@@ -1,39 +1,39 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Target, FileSearch, History, Info, Menu, X, Sparkles, Zap } from 'lucide-react';
+import { FileText, FileSearch, History, Info, Menu, X, ArrowUpRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home', path: '/', icon: Target },
+    { name: 'Home', path: '/', icon: FileText },
     { name: 'Analyze', path: '/analyze', icon: FileSearch },
     { name: 'History', path: '/history', icon: History },
     { name: 'About', path: '/about', icon: Info },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 shadow-lg shadow-black/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           
-          {/* Logo with Vibrant Gradient */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/30 group-hover:scale-105 group-hover:shadow-indigo-500/50 transition-all duration-300">
-              <Target className="w-5 h-5 stroke-[2.5]" />
+          {/* Minimalist Logo */}
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-white">
+              <FileText className="w-4 h-4" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-black text-xl tracking-tight text-white flex items-center gap-1">
-                Resume<span className="text-gradient-primary">Match</span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-lg tracking-tight text-zinc-900">
+                Resume<span className="text-zinc-600">Match</span>
               </span>
-              <span className="text-[10px] uppercase tracking-widest font-bold text-indigo-400 -mt-1 flex items-center gap-1">
-                <Sparkles className="w-2.5 h-2.5 text-indigo-400 inline animate-pulse" /> ATS AI Engine
+              <span className="text-[11px] font-medium text-zinc-600 px-1.5 py-0.5 rounded bg-zinc-100">
+                ATS
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-1.5 bg-slate-900/60 p-1.5 rounded-xl border border-slate-800/80">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -42,50 +42,47 @@ export const Navbar: React.FC = () => {
                   to={item.path}
                   end={item.path === '/'}
                   className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 ${
+                    `flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                       isActive
-                        ? 'bg-gradient-to-r from-blue-600/30 via-indigo-600/30 to-purple-600/30 text-white border border-indigo-500/40 shadow-sm shadow-indigo-500/20'
-                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                        ? 'bg-zinc-100 text-zinc-900 font-semibold'
+                        : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50'
                     }`
                   }
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-4 h-4 text-zinc-600" />
                   {item.name}
                 </NavLink>
               );
             })}
           </nav>
 
-          {/* Quick Action Button */}
+          {/* Clean Action Button */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/analyze"
-              className="relative group px-5 py-2.5 rounded-xl font-bold text-xs text-white overflow-hidden shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all duration-300 active:scale-95"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-zinc-900 hover:bg-zinc-800 text-white transition-colors"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 group-hover:opacity-90 transition-opacity" />
-              <div className="relative flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 fill-white/20" />
-                <span>Check Resume Now</span>
-              </div>
+              <span>Scan Resume</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-300" />
             </Link>
           </div>
 
-          {/* Mobile hamburger menu toggle */}
+          {/* Mobile hamburger menu */}
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 focus:outline-none border border-slate-800"
+              className="p-2 rounded-lg text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 focus:outline-none"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Glass Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6 space-y-2 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top duration-200">
+        <div className="md:hidden border-b border-zinc-200 bg-white px-4 pt-2 pb-5 space-y-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -95,26 +92,26 @@ export const Navbar: React.FC = () => {
                 end={item.path === '/'}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                  `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-600/30 to-indigo-600/30 text-white border border-indigo-500/40'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-900'
+                      ? 'bg-zinc-100 text-zinc-900 font-semibold'
+                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50'
                   }`
                 }
               >
-                <Icon className="w-5 h-5 text-indigo-400" />
+                <Icon className="w-4 h-4 text-zinc-600" />
                 {item.name}
               </NavLink>
             );
           })}
-          <div className="pt-3">
+          <div className="pt-2">
             <Link
               to="/analyze"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-bold text-sm text-center rounded-xl shadow-lg shadow-indigo-600/40"
+              className="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 bg-zinc-900 text-white font-medium text-sm rounded-lg"
             >
-              <Zap className="w-4 h-4" />
-              Analyze Resume Now
+              <span>Scan Resume</span>
+              <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
